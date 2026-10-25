@@ -22,21 +22,23 @@ Reuse existing equivalents. Do not introduce a second planning system merely to 
 | --- | --- | --- |
 | `plan/project.md` | Purpose/users; final outcome; scope/non-goals; Milestone Goals and acceptance; Workstreams and dependencies; Guardrails and authoritative rule links; lasting decisions; operating mode and record locations | A goal, boundary, constraint, lasting decision or milestone/Workstream outcome changes |
 | `plan/current.md` | Current focus and why; the one current Queue, exact approval and item outcomes; blockers; next safe action; relevant evidence links; pending publication | A Queue is proposed/approved, meaningful progress must survive interruption, a blocker/decision arises, or work ends |
-| `plan/history.md` | Append-only completed/stopped attempt records: approved scope, outcome, evidence, decisions and residual work | An attempt ends, or before replacing the current Queue |
+| `plan/history.md` | Append-only Queue outcomes and consequential attempt records: approved scope, outcome, evidence, decisions and residual work | A Queue or consequential attempt ends, or before replacing the current Queue |
 
 Create history only when there is a real record. Link large evidence rather than copying it. Split an oversized history by date or Queue, leaving a small index; preserve old links.
 
 Stable information belongs in Project, live execution in Current, past outcomes in History. Other places link to the owner rather than repeat its editable status. Small projects need only two live files; additional documents must solve a concrete reading or coordination problem.
 
+In every mode, one coordinating agent owns writes to shared planning records for the active Queue. Parallel executors work within approved file/interface boundaries and return outcomes, evidence and blockers to that coordinator instead of editing those records. Identify the coordinator in Current when multiple agents participate. This is a writing convention, not a lock or a guarantee of concurrent-write safety.
+
 ### Project model
 
 - **Final goal:** who benefits and what observable outcome constitutes success; include explicit non-goals.
 - **Milestone Goals:** independently verifiable outcomes, not percentages or counts of completed tasks. Use only as many as the project needs.
-- **Workstreams:** coherent areas of work, each with an objective, primary goal/milestone, acceptance, state and real output dependencies. Keep a compact table in Project; create a separate document only for substantial design or coordination.
-- **Current focus:** the outcome being advanced now and its reason. Keep it in Current; normally concentrate on one outcome and only the Workstreams needed for it.
+- **Workstreams (optional):** sustained work areas or parallel ownership boundaries, not another time horizon. Create them only when they clarify responsibility or real output dependencies. Each has an objective, primary goal/milestone, acceptance, state and required outputs. Keep a compact table in Project; create a separate document only for substantial design or coordination.
+- **Current focus:** name the milestone being advanced, the acceptance gap this Queue should reduce, and why now. Link to the milestone rather than copying its status. Normally concentrate on one outcome and only the Workstreams needed for it. If work does not directly advance a milestone, explain why it is necessary instead of inventing a relationship.
 - **Queue:** a finite ordered set of deliverables selected for that focus. Each item names its Workstream when one exists.
 
-A single change may use one milestone, one Workstream and one Queue item without separate hierarchy documents. Phases are optional design subdivisions, not mandatory records, Issues or approval rounds. Plan the near term concretely; leave distant work at outcome level.
+A single change can use one milestone and one Queue item, with no Workstream or separate hierarchy documents. Phases are optional design subdivisions, not mandatory records, Issues or approval rounds. Plan the near term concretely; leave distant work at outcome level.
 
 Preserve existing IDs. Add new IDs when stable references are needed, not to populate every sentence with identifiers. Dependencies name required outputs; ordering alone does not prove readiness. Detect dependency cycles before execution.
 
@@ -61,10 +63,10 @@ Fold standards conformance into the deliverable's verification and final review.
 ## 4. Adoption or migration — once, not every session
 
 1. **Inspect:** repository instructions, README, relevant architecture/source, tools/CI/standards, ongoing plans, approval history and remotes. Read relevant remote state without mutation when needed. Separate facts from assumptions; do not perform an exhaustive code audit merely to adopt planning.
-2. **Draft the model:** final goal, scope/non-goals, observable milestones, initial Workstreams, current focus, Guardrails and unresolved decisions. Reuse known answers and existing plans. Present the model for agreement; unresolved intent stays explicitly draft.
+2. **Draft the model:** final goal, scope/non-goals, observable milestones, Workstreams only if useful, current focus, Guardrails and unresolved decisions. Reuse known answers and existing plans. Present the model for agreement; unresolved intent stays explicitly draft.
 3. **Ask one batch of material questions:** include whether additional coding standards or guard instructions exist, unless already answered. Before remote changes, confirm `local-only` or `github`, exact destination, permitted operations and access expectations. Existing consent may be reused only for the same target and operations; credentials/remotes are not consent.
-4. **Deploy agreed records:** create/reuse Project and Current, with a proposed Queue and no invented approval, bugs or history. Link this selected skill and the record entry point from the repository's existing agent instructions. Preserve unrelated instructions. A downloaded skill without a discoverable entry is not adoption.
-5. **Verify:** links, record ownership, goal/Workstream relationships, relevant rules, approval state and actual mode. Report real paths/URLs and unresolved setup. Deployment does not execute a Queue.
+4. **Deploy agreed records:** create/reuse Project and Current, with a proposed Queue and no invented approval, bugs or history. Save or reuse a project-selected local copy of this skill; record its source URL and revision or content hash. Link that copy and the record entry point from the repository's existing agent instructions, preserving unrelated instructions. Later sessions use the selected copy; upgrading it requires explicit agreement, not automatic tracking of `main`. A downloaded skill without a discoverable entry is not adoption.
+5. **Verify:** links, record ownership, goal relationships and any Workstreams, relevant rules, selected skill version, approval state and actual mode. Report real paths/URLs and unresolved setup. Deployment does not execute a Queue.
 
 When migrating, first reconcile the active Queue, original approvals, history, authoritative remote state and pending writes. Preserve IDs, evidence and historical outcomes. Agree any source-of-truth or collaboration change explicitly; do not silently reinterpret old states or execute old approvals. Point to the new owners and stop maintaining superseded projections only after a recoverable cutover. Do not delete history to simplify the layout.
 
@@ -95,7 +97,9 @@ Before each item, confirm valid approval, no later stop/cancellation, actual pre
 
 Implement within scope; run the configured checks and exercise the changed behavior. Fix in-scope failures under the existing approval: a failing test is feedback, not automatically a blocker or a request for another Queue. Escalate only a missing prerequisite, exhausted agreed investigation bound, or necessary scope/risk decision. Record what actually ran, its result, evidence and limitations. For investigation work, preserve findings and observations rather than manufacturing implementation. For non-code deliverables, use a representative walkthrough or other direct validation and name its limits.
 
-Keep item state simple: pending, active, done, blocked or canceled. “Done” requires its acceptance evidence; canceled is not successful. Record unsuccessful attempts before retrying. A later success does not erase earlier outcomes. A completed item does not automatically satisfy its Workstream or milestone's separate acceptance.
+Keep item state simple: pending, active, done, blocked or canceled. “Done” requires its acceptance evidence; canceled is not successful. A completed item does not automatically satisfy its Workstream or milestone's separate acceptance.
+
+Routine edit/check/fix iterations remain part of the same attempt: keep relevant failure evidence and its resolution with the item, not a History entry for every failed command. An attempt warrants its own record when a blocker, handoff, stop or material approach change affects recovery or future decisions. Preserve that outcome before retrying; a later success does not erase it.
 
 On a blocker, save the attempted work, evidence, exact obstacle and minimum resume condition. Continue independent approved items. Ask only when a human decision is needed. Honor agreed investigation bounds; do not use endless retries to manufacture clearance.
 
@@ -117,7 +121,7 @@ Prefer existing project tooling over inventing a synchronization framework.
 
 - **Local-only:** repository planning files are authoritative. No GitHub prerequisites, outbox, remote polling or permanent “not synchronized” warnings.
 - **GitHub:** for a new lean deployment, repository planning files remain authoritative; agreed Issues/Projects publish links and useful Queue-level summaries. Confirm repository/Project and publication permissions first. Do not automatically create one Issue per Phase, standing boards, custom fields or native relationship graphs.
-- **Existing GitHub-native projects:** retain their authoritative records and verified integration by default; unchanged ownership needs no new approval. Reuse existing records instead of creating competing local owners. Lightweight operation requires clear ownership and a single writer per record. If two-way/offline synchronization is required, retain the existing verified integration or explicitly agree a local-first cutover; this skill does not provide a synchronization engine.
+- **Existing GitHub-native projects:** retain their authoritative records and verified integration by default; unchanged ownership needs no new approval. Reuse existing records instead of creating competing local owners. If two-way/offline synchronization is required, retain the existing verified integration or explicitly agree a local-first cutover; this skill does not provide a synchronization engine.
 
 Publish once at Queue completion or handoff, plus immediate human decision/blocker notifications when needed. If GitHub is an approved decision channel, read the relevant thread at session start/resume and before each item so cancellation or scope decisions are not missed. Do not poll unrelated Issues or refresh all Project fields.
 
@@ -137,7 +141,7 @@ Use these headings inside existing equivalents; empty ceremonial sections are un
 Users; final observable outcome; included/excluded work.
 ## Milestone Goals
 ID/name | outcome and acceptance | verified state
-## Workstreams
+## Workstreams (only if useful)
 ID/name | primary goal | objective/acceptance | state | output dependencies
 ## Guardrails
 Hard boundaries; authoritative standards/configuration; verification commands.
@@ -150,12 +154,12 @@ Mode; record owners/locations; approvers; approved publication targets/operation
 ```markdown
 # Current
 ## Focus
-Outcome and why now.
+Milestone link; acceptance gap this Queue should reduce; why now.
 ## Queue <ID/revision>
 Scope/non-goals; approval source and exact approved snapshot, or UNAPPROVED.
 Item | deliverable/acceptance | dependencies | state | evidence
 ## Recovery
-Current blocker/checkpoint; next safe action; relevant history/design links.
+Current blocker/checkpoint; next safe action; relevant history/design links; coordinator when multiple agents participate.
 ## Pending publication
 Only actual outstanding actions; omit when none.
 ```
